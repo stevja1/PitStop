@@ -23,5 +23,14 @@ public class VehicleService {
                 null
         );
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{userId}", produces = "application/json")
+    public ResponseBase<VehicleEntity> getVehiclesByUserId(@PathVariable final long userId) {
+        return new ResponseBase<VehicleEntity>(
+                String.format("This should return all of the vehicles associated with a user."),
+                ResponseBase.ResponseStatus.SUCCESS,
+                null
+        );
+    }
 }
 

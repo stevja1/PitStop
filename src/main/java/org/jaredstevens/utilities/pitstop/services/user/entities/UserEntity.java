@@ -1,6 +1,8 @@
 package org.jaredstevens.utilities.pitstop.services.user.entities;
 
 import javax.persistence.*;
+import org.jaredstevens.utilities.pitstop.services.vehicle.entities.VehicleEntity;
+import java.util.List;
 
 @Entity
 public class UserEntity {
@@ -18,6 +20,10 @@ public class UserEntity {
     private long lastUpdated;
     @Column(columnDefinition = "BOOLEAN default true NOT NULL")
     private boolean active;
+
+    @Column
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<VehicleEntity> vehicles;
 
     public long getId() {
         return id;
@@ -97,5 +103,13 @@ public class UserEntity {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<VehicleEntity> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(List<VehicleEntity> vehicles) {
+        this.vehicles = vehicles;
     }
 }

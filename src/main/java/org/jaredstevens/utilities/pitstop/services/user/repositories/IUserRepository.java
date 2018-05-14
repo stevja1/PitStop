@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface IUserRepository extends CrudRepository<UserEntity, Long> {
-    public List<UserEntity> findByEmail(String email);
+    List<UserEntity> findByEmail(String email);
 }

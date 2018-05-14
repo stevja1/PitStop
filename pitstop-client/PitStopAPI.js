@@ -22,9 +22,46 @@ export default class PitStopAPI {
 				},
 			});
 
-			console.log("Got here.\n");
 			let responseJson = await response.json();
-			console.log("Got here, now.\n");
+			successCallback(responseJson);
+		} catch(error) {
+			errorCallback(error);
+		}
+	}
+
+	/**
+	 * Authenticate
+	 */
+	async checkUser(email, password, successCallback, errorCallback) {
+		var path = "/user/auth/"+email+"/"+password;
+		var url = this.protocol+"://"+this.host+":"+this.port+path;
+		console.log("Calling (GET) URL: "+url);
+		try {
+			let response = await fetch(url, {
+				method: 'GET',
+				headers: {
+				},
+			});
+
+			let responseJson = await response.json();
+			successCallback(responseJson);
+		} catch(error) {
+			errorCallback(error);
+		}
+	}
+
+	async getVehicles(userId, successCallback, errorCallback) {
+		var path = "/user/"+userId+"/vehicles/";
+		var url = this.protocol+"://"+this.host+":"+this.port+path;
+		console.log("Calling (GET) URL: "+url);
+		try {
+			let response = await fetch(url, {
+				method: 'GET',
+				headers: {
+				},
+			});
+
+			let responseJson = await response.json();
 			successCallback(responseJson);
 		} catch(error) {
 			errorCallback(error);

@@ -1,6 +1,9 @@
 package org.jaredstevens.utilities.pitstop.services.vehicle.entities;
 
 import javax.persistence.*;
+import org.jaredstevens.utilities.pitstop.services.mileage.entities.MileageEntity;
+
+import java.util.List;
 
 @Entity
 public class VehicleEntity {
@@ -18,6 +21,10 @@ public class VehicleEntity {
     @Lob
     @Column(nullable = false, length = 65536)
     private String image;
+    @Column
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<MileageEntity> mileage;
+
 
     public long getId() {
         return id;
@@ -65,5 +72,13 @@ public class VehicleEntity {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public List<MileageEntity> getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(List<MileageEntity> mileage) {
+        this.mileage = mileage;
     }
 }
