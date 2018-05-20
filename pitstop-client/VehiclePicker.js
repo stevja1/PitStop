@@ -10,7 +10,7 @@ import {
 
 const styles = require('./global-styles.js');
 
-export default class VehiclesList extends React.Component {
+export default class VehiclePicker extends React.Component {
 	constructor(props) {
     super(props);
 		this.state = {
@@ -43,10 +43,11 @@ export default class VehiclesList extends React.Component {
 
 	render() {
 		if(this.state.vehicles != null) {
+			let onPress = this.props.onPress;
 			return (
 				<PitStopPanel background={require('./assets/vehicles.png')}>
 					{this.state.vehicles.map(function(d, idx){
-						return (<VehicleAvatar key={idx} year={d.year} make={d.make} model={d.model} name={d.nickName} onPress={()=>console.log("You pressed the truck button.")}/>)
+						return (<VehicleAvatar key={d.id} year={d.year} make={d.make} model={d.model} name={d.nickName} onPress={() => {onPress(d.id)}}/>)
 					})}
 				</PitStopPanel>
 			);

@@ -5,7 +5,8 @@ import {
 } from 'react-native';
 
 import LoginForm from './LoginForm.js';
-import VehiclesList from './VehiclesList.js';
+import VehiclePicker from './VehiclePicker.js';
+import MileageForm from './MileageForm.js';
 
 const styles = require('./global-styles.js');
 
@@ -15,6 +16,7 @@ export default class App extends React.Component {
 		this.state = {
 			currentForm: "LOGIN",
 			userId: null,
+			selectedVehicleId: null,
 		};
 		this.getUserId();
 		// StatusBar.setHidden(true);
@@ -61,13 +63,19 @@ export default class App extends React.Component {
 		if(this.state.currentForm == "VEHICLES") {
 			return (
 				<View>
-					<VehiclesList userId={this.state.userId} onPress={() => {this.setState({currentForm: "LOGIN"})}}/>
+					<VehiclePicker userId={this.state.userId} onPress={(vehicleId) => {
+							this.setState({
+								currentForm: "MILEAGE",
+								selectedVehicleId: vehicleId,
+							})
+						}
+					} />
 				</View>
 			);
 		} else if(this.state.currentForm == "MILEAGE") {
 			return (
 				<View>
-					<MileageForm onPress={() => {this.setState({currentForm: "VEHICLES"})}}/>
+					<MileageForm vehicleId={this.state.selectedVehicleId} onPress={() => {this.setState({currentForm: "VEHICLES"})}}/>
 				</View>
 			);
 		} else if(this.state.currentForm == "LOGIN") {
